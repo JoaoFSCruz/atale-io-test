@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col mt-4">
+    <div class="flex flex-col">
         <div class="flex items-center">
             <label class="text-xl tracking-wide" for="search">
                 Search for a parent by email
@@ -22,7 +22,7 @@
             >
             <div class="absolute w-full mt-1 border shadow-sm rounded-lg bg-gray-50 max-h-56 overflow-y-auto z-40" v-if="users.length > 0 && show">
                 <ul v-for="user in users" :key="user.email">
-                    <li class="cursor-pointer px-6 py-3 text-xl hover:bg-gray-100" @mousedown="selectUser(user.email)">{{ user.email }}</li>
+                    <li class="cursor-pointer px-3 py-2 text-base hover:bg-gray-100 md:px-6 md:py-3 md:text-xl" @mousedown="selectUser(user.email)">{{ user.email }}</li>
                 </ul>
             </div>
         </div>

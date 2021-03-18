@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col mt-4">
+    <div class="flex flex-col">
         <label class="text-xl tracking-wide" for="search">
             Search for a child by email
         </label>
@@ -17,7 +17,7 @@
             >
             <div class="absolute w-full mt-1 border shadow-sm rounded-lg bg-gray-50 max-h-56 overflow-y-auto z-40" v-if="users.length > 0 && show">
                 <ul v-for="user in users" :key="user.email">
-                    <li class="flex items-center cursor-pointer px-6 py-3 text-xl hover:bg-gray-100" @mousedown="addChild(user.email)">
+                    <li class="flex items-center cursor-pointer px-3 py-2 text-base hover:bg-gray-100 md:px-6 md:py-3 md:text-xl" @mousedown="addChild(user.email)">
                         <svg class="w-6 h-6 mr-2 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
                         {{ user.email }}
                     </li>

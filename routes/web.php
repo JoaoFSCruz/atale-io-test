@@ -1,9 +1,8 @@
 <?php
 
-use App\Http\Controllers\GetResults;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\CheckUserExists;
+use App\Http\Controllers\GetFamilyCount;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,8 +17,9 @@ use App\Http\Controllers\CheckUserExists;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
-Route::get('/users', [UserController::class, 'index']);
-Route::post('/users', [UserController::class, 'store']);
-Route::post('/users/check', CheckUserExists::class);
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
+Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+Route::post('/users', [UserController::class, 'store'])->name('users.store');
+Route::post('/get-family-count', GetFamilyCount::class)->name('get-family-count');
