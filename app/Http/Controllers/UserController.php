@@ -31,15 +31,22 @@ class UserController extends Controller
 
         if ($request->has('parent')) {
             $parentUser = User::where('email', $request->input('parent'))->first();
-            $parentUser->appendNode($user);
+            $user->appendToNode($parentUser);
         } else {
-            $user->saveAsRoot();
+            $user->makeRoot();
         }
 
         $children = $request->input('children');
         foreach ($children as $childEmail) {
-           $child = User::where('email', $childEmail)->first();
-           $user->appendNode($child);
+            $child = User::where('email', $childEmail)->first();
+
+            if ($user->isChildOf($child)) {
+                return response()->json([
+                    'errors' => [ 'children' => [$childEmail . ' is your parent. Your parent can not be your child.'] ]
+                ], Response::HTTP_UNPROCESSABLE_ENTITY);
+            }
+
+            $child->appendToNode($user);
         }
 
         $user->save();

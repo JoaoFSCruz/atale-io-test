@@ -1,8 +1,13 @@
 <template>
     <div class="flex flex-col">
-        <label class="text-xl tracking-wide" for="search">
-            Search for a child by email
-        </label>
+        <div class="flex items-center">
+            <label class="text-xl tracking-wide" for="search">
+                Search for a child by email
+            </label>
+            <span class="ml-8 text-red-600" v-if="error">
+                {{ error }}
+            </span>
+        </div>
 
         <div class="relative">
             <input
@@ -42,6 +47,7 @@ export default {
     props: {
         label: String,
         route: String,
+        error: String
     },
 
     data() {

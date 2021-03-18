@@ -25,7 +25,7 @@
         <div class="mt-12 space-y-12">
             <parent-search-input @parent-selected="setParent" :error="errors.hasOwnProperty('parent') ? errors.parent[0] : null"></parent-search-input>
 
-            <children-search-input @child-selected="setChildren"></children-search-input>
+            <children-search-input @child-selected="setChildren" :error="errors.hasOwnProperty('children') ? errors.children[0] : null"></children-search-input>
         </div>
 
         <button
