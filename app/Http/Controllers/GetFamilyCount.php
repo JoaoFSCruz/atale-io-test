@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Response;
 use App\Http\Requests\GetFamilyCountRequest;
 
 class GetFamilyCount extends Controller
@@ -14,7 +13,7 @@ class GetFamilyCount extends Controller
      *
      * @param  \App\Http\Requests\GetFamilyCountRequest  $request
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Contracts\Foundation\Application
      */
     public function __invoke(GetFamilyCountRequest $request)
     {
@@ -23,6 +22,6 @@ class GetFamilyCount extends Controller
         $ascendants = count($user->ancestors);
         $descendants = count($user->descendants);
 
-        return response()->json([ 'ascendants' => $ascendants, 'descendants' => $descendants], Response::HTTP_OK);
+        return view('results', compact('ascendants', 'descendants'));
     }
 }
