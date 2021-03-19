@@ -29,7 +29,7 @@ class UserController extends Controller
         $user = new User();
         $user->email = $request->input('email');
 
-        if ($request->has('parent')) {
+        if ($request->filled('parent')) {
             $parentUser = User::where('email', $request->input('parent'))->first();
             $user->appendToNode($parentUser);
         } else {
@@ -42,7 +42,7 @@ class UserController extends Controller
 
             if ($user->isChildOf($child)) {
                 return response()->json([
-                    'errors' => [ 'children' => [$childEmail . ' is your parent. Your parent can not be your child.'] ]
+                    'errors' => [ 'children' => [$childEmail . ' is already your parent.'] ]
                 ], Response::HTTP_UNPROCESSABLE_ENTITY);
             }
 
@@ -51,6 +51,6 @@ class UserController extends Controller
 
         $user->save();
 
-        return response()->json(null, Response::HTTP_OK);
+        return response()->json(null, Response::HTTP_CREATED);
     }
 }
