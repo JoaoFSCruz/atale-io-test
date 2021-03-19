@@ -19,4 +19,8 @@
             <p class="text-3xl mt-4">Descendants</p>
         </div>
     </div>
+
+    <a class="px-6 py-4 bg-gray-600 text-gray-50 uppercase text-lg rounded-lg mt-8 font-semibold hover:bg-gray-800 md:text-2xl md:mt-12" href="{{ route('welcome') }}">
+        Back
+    </a>
 @endsection
