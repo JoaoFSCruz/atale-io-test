@@ -7,7 +7,6 @@ use App\Http\Requests\GetFamilyCountRequest;
 
 class GetFamilyCount extends Controller
 {
-
     /**
      * Handle the incoming request.
      *

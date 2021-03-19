@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <form method="POST" action="{{ route('get-family-count') }}" class="w-3/4 flex flex-col pb-12 lg:w-1/2">
+    <form method="GET" action="{{ route('get-family-count') }}" class="w-3/4 flex flex-col pb-12 lg:w-1/2">
         @csrf
         <h1 class="text-3xl md:text-4xl">
             Find out your <span class="text-yellow-400">ascendants</span> and <span class="text-yellow-400">descendants</span>
