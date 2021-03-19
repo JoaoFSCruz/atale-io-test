@@ -30,6 +30,8 @@
 </template>
 
 <script>
+    import _ from "lodash";
+
     export default {
         props: {
             label: String,
@@ -46,20 +48,26 @@
         },
 
         methods: {
+            getUsers: _.debounce((context) => {
+                axios.get('/users', {
+                    params: {
+                        query: context.searchQuery
+                    }
+                })
+                    .then((response) => {
+                        context.users = response.data;
+                        context.show = context.users.length > 0;
+                    })
+                    .catch((error) => console.log(error.response));
+            }, 350),
+
             search() {
                 this.users = [];
                 this.show = false;
 
-                axios.get('/users', {
-                    params: {
-                        query: this.searchQuery
-                    }
-                })
-                    .then((response) => {
-                        this.users = response.data;
-                        this.show = this.users.length > 0;
-                    })
-                    .catch((error) => console.log(error.response));
+                if (this.searchQuery) {
+                    this.getUsers(this);
+                }
             },
 
             selectUser(email) {
