@@ -63,7 +63,9 @@
                     parent: this.parent,
                     children: _.cloneDeep(this.children)
                 })
-                    .then((response) => this.results = response.data)
+                    .then(() => {
+                        this.sendMessage();
+                    })
                     .catch((error) => {
                         this.errors = error.response.data.errors;
                     });
@@ -76,6 +78,10 @@
             setChildren(children) {
                 this.children = children;
             },
+
+            sendMessage() {
+                emmiter.emit('flash', { message: 'Successfully registered!', goToWelcomePage: true });
+            }
         }
     }
 </script>

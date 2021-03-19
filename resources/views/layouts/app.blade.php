@@ -25,6 +25,8 @@
         @include('layouts.nav')
 
         <div class="container mx-auto mt-12 lg:mt-32 flex flex-col items-center">
+            <flash></flash>
+
             @yield('content')
         </div>
     </body>
