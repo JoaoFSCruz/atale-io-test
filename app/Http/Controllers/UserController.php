@@ -36,20 +36,23 @@ class UserController extends Controller
             $user->makeRoot();
         }
 
-        $children = $request->input('children');
-        foreach ($children as $childEmail) {
-            $child = User::where('email', $childEmail)->first();
-
+        $childrenEmails = $request->input('children');
+        $children = User::whereIn('email', $childrenEmails)->get();
+        $validatedChildren = [];
+        foreach ($children as $child) {
             if ($user->isChildOf($child)) {
                 return response()->json([
-                    'errors' => [ 'children' => [$childEmail . ' is already your parent.'] ]
+                    'errors' => [ 'children' => [$child->email . ' is already your parent.'] ]
                 ], Response::HTTP_UNPROCESSABLE_ENTITY);
             }
 
-            $child->appendToNode($user);
+            $validatedChildren[] = $child;
         }
 
         $user->save();
+        foreach ($validatedChildren as $child) {
+            $user->appendNode($child);
+        }
 
         return response()->json(null, Response::HTTP_CREATED);
     }
