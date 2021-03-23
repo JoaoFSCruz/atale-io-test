@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Http\Requests\GetFamilyCountRequest;
 
-class GetFamilyCount extends Controller
+class FamilyCountController extends Controller
 {
     /**
      * Handle the incoming request.

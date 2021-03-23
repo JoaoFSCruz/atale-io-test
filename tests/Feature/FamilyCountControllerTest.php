@@ -6,7 +6,7 @@ use App\Models\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class GetFamilyCountTest extends TestCase
+class FamilyCountControllerTest extends TestCase
 {
     use RefreshDatabase;
 
